@@ -1,6 +1,7 @@
 package com.notivo.home.di
 
 import com.notivo.common.navigation.Feature
+import com.notivo.home.navigation.HomeFeature
 import com.notivo.home.navigation.HomeFeatureImpl
 import dagger.Module
 import dagger.Provides
@@ -12,7 +13,7 @@ import dagger.hilt.components.SingletonComponent
 object HomeModule {
 
     @Provides
-    fun provideHomeFeature(): Feature {
+    fun provideHomeFeature(): HomeFeature {
         return HomeFeatureImpl()
     }
 }

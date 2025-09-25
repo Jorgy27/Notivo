@@ -16,8 +16,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.notivo.common.navigation.SubGraphDestination
 import com.notivo.ui.theme.NotivoTheme
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     @Inject
@@ -29,7 +34,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             NotivoTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Box(modifier = Modifier.padding(innerPadding)){
+                    Box(modifier = Modifier.padding(innerPadding)) {
                         MainNavigation(defaultNavigator = defaultNavigator)
                     }
                 }
@@ -39,13 +44,13 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainNavigation(modifier: Modifier = Modifier, defaultNavigator: DefaultNavigator){
+fun MainNavigation(modifier: Modifier = Modifier, defaultNavigator: DefaultNavigator) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
         startDestination = SubGraphDestination.Home
     ) {
-        defaultNavigator.homeFeature.registerNavigationGraph(navController,  this)
+        defaultNavigator.homeFeature.registerNavigationGraph(navController, this)
         // add more destinations here.
     }
 }
