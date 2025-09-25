@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.notivo.common"
+    namespace = "com.notivo.home"
     compileSdk = 36
 
     defaultConfig {
@@ -44,6 +44,8 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -65,4 +67,9 @@ dependencies {
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.compose.navigation)
     implementation(libs.kotlinx.serialization.json)
+
+
+    // Modules
+    // Include various feature modules as dependencies, promoting modular architecture
+    implementation(project(":common"))
 }

@@ -5,11 +5,10 @@ plugins {
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.serialization)
-    kotlin("kapt")
 }
 
 android {
-    namespace = "com.gtrahan.notivo"
+    namespace = "com.notivo"
     compileSdk = 36
 
     defaultConfig {
@@ -65,7 +64,7 @@ dependencies {
 
     // Dagger-Hilt
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
     implementation(libs.dagger)
     implementation(libs.dagger.android.support)
     ksp(libs.dagger.compiler)
@@ -83,6 +82,6 @@ dependencies {
 
     // Modules
     // Include various feature modules as dependencies, promoting modular architecture
-//    implementation(project(":common"))
-//    implementation(project(":home"))
+    implementation(project(":common"))
+    implementation(project(":home"))
 }
