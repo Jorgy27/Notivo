@@ -23,4 +23,4 @@ rootProject.name = "Notivo"
 include(":app")
 include(":common")
 include(":home")
-include(":apiRoom")
+include(":apiroom")
