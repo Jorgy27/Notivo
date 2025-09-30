@@ -9,6 +9,7 @@ import com.notivo.common.navigation.Feature
 import com.notivo.common.navigation.SubGraphDestination
 import com.notivo.mylists.composables.MyListsScreen
 
+/**Feature specific interface, created for better semantics*/
 interface MyListsFeature : Feature
 
 class MyListsFeatureImpl : MyListsFeature{
