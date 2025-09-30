@@ -84,4 +84,5 @@ dependencies {
     // Include various feature modules as dependencies, promoting modular architecture
     implementation(project(":common"))
     implementation(project(":home"))
+    implementation(project(":mylists"))
 }

@@ -1,4 +1,4 @@
-package com.notivo.home.composables
+package com.notivo.mylists.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -10,18 +10,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
-
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun MyListsScreen(modifier: Modifier = Modifier, onClick: () -> Unit) {
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Cyan),
+            .background(Color.Magenta),
         contentAlignment = Alignment.Center,
         propagateMinConstraints = false
     ) {
         Text(
-            text = "Hello Home!",
+            text = "My Lists",
             modifier = Modifier
                 .clickable { onClick() } // invoke the click lambda
         )

@@ -1,25 +1,25 @@
-package com.notivo.home.navigation
+package com.notivo.mylists.navigation
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.notivo.home.composables.HomeScreen
 import com.notivo.common.navigation.Destination
 import com.notivo.common.navigation.Feature
 import com.notivo.common.navigation.SubGraphDestination
+import com.notivo.mylists.composables.MyListsScreen
 
-interface HomeFeature : Feature {}
+interface MyListsFeature : Feature
 
-class HomeFeatureImpl : HomeFeature {
+class MyListsFeatureImpl : MyListsFeature{
     override fun registerNavigationGraph(
         navHostController: NavHostController,
         navGraphBuilder: NavGraphBuilder
     ) {
-        navGraphBuilder.navigation<SubGraphDestination.Home>(startDestination = Destination.Home) {
-            composable<Destination.Home> {
-                HomeScreen{
-                    navHostController.navigate(Destination.MyLists)
+        navGraphBuilder.navigation<SubGraphDestination.MyLists>(startDestination = Destination.MyLists) {
+            composable<Destination.MyLists> {
+                MyListsScreen{
+                    //navHostController.navigate()
                 }
             }
         }

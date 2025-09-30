@@ -6,15 +6,20 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.notivo.common.navigation.SubGraphDestination
+import com.notivo.home.navigation.HomeFeature
 import com.notivo.ui.theme.NotivoTheme
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -51,6 +56,7 @@ fun MainNavigation(modifier: Modifier = Modifier, defaultNavigator: DefaultNavig
         startDestination = SubGraphDestination.Home
     ) {
         defaultNavigator.homeFeature.registerNavigationGraph(navController, this)
+        defaultNavigator.myListsFeature.registerNavigationGraph(navController, this)
         // add more destinations here.
     }
 }
