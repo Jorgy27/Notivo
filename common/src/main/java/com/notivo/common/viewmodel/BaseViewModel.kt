@@ -14,11 +14,11 @@ abstract class BaseViewModel<ViewState : BaseViewState, ViewAction : BaseAction>
         _stateMutableLiveData.value = new
     }
 
-    //Is used to update the viewModel liveData and trigger the observe delegate function.
+    /**Is used to update the viewModel liveData and trigger the observe delegate function.*/
     fun sendAction(viewAction: ViewAction){
         state = onReduceState(viewAction)
     }
 
-    //Is used to set the state of each Ui action.
+    /**Is used to set the state of each Ui action.*/
     protected abstract fun onReduceState(viewAction: ViewAction): ViewState
 }
