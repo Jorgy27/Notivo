@@ -1,21 +1,23 @@
 package com.notivo.common.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.notivo.common.extensions.toLiveData
-import kotlin.properties.Delegates
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 abstract class BaseViewModel<ViewState : BaseViewState, ViewAction : BaseAction>(initialState: ViewState) : ViewModel() {
 
-    private val _stateMutableLiveData = MutableLiveData<ViewState>()
-    val stateLiveData = _stateMutableLiveData.toLiveData()
+    private val _stateFlow = MutableStateFlow(initialState)
+    val stateFlow: StateFlow<ViewState> = _stateFlow.asStateFlow()
 
-    protected var state by Delegates.observable(initialState) { _, old, new ->
-        _stateMutableLiveData.value = new
-    }
+    protected var state: ViewState
+        get() = _stateFlow.value
+        set(value) {
+            _stateFlow.value = value
+        }
 
     /**Is used to update the viewModel liveData and trigger the observe delegate function.*/
-    fun sendAction(viewAction: ViewAction){
+    fun dispatch(viewAction: ViewAction) {
         state = onReduceState(viewAction)
     }
 
