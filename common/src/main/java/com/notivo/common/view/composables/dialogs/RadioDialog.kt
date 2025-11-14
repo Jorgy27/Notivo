@@ -15,13 +15,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
@@ -33,16 +29,14 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.notivo.common.R
 import com.notivo.common.data.AppDialogItemInfo
 import com.notivo.common.data.DialogButton
 import com.notivo.common.data.DialogTitle
 import com.notivo.common.utils.FontUtil
+import com.notivo.common.view.composables.GeneralTextButton
 import com.notivo.common.view.composables.builders.AppDialogUiBuilder
 
 data class RadioDialogBuilder(
@@ -131,53 +125,28 @@ data class RadioDialogBuilder(
                 .height(50.dp)
         ) {
             dialogItemInfo.negativeButton?.let { button ->
-                DialogButton(
-                    button.text,
-                    button.fontFamily,
-                    button.fontSize,
-                    button.isEnabled.value,
-                    button.bgColor,
-                    dialogItemInfo.onNegativeButtonClicked
+                GeneralTextButton(
+                    text = button.text,
+                    fontFamily = button.fontFamily,
+                    fontSize = button.fontSize,
+                    enabled = button.isEnabled.value,
+                    textColor = button.bgColor,
+                    buttonColors = null,
+                    onClick = dialogItemInfo.onNegativeButtonClicked
                 )
             }
 
             dialogItemInfo.positiveButton?.let { button ->
-                DialogButton(
-                    button.text,
-                    button.fontFamily,
-                    button.fontSize,
-                    button.isEnabled.value,
-                    button.bgColor,
-                    dialogItemInfo.onPositiveButtonClicked
+                GeneralTextButton(
+                    text = button.text,
+                    fontFamily = button.fontFamily,
+                    fontSize = button.fontSize,
+                    enabled = button.isEnabled.value,
+                    textColor = button.bgColor,
+                    buttonColors = null,
+                    onClick = dialogItemInfo.onPositiveButtonClicked
                 )
             }
-        }
-    }
-}
-
-@Composable
-fun DialogButton(
-    text: String?,
-    fontFamily: FontFamily,
-    fontSize: TextUnit,
-    enabled: Boolean,
-    backgroundColor: Int?,
-    onClick: () -> Unit,
-) {
-    TextButton(
-        onClick = onClick,
-        enabled = enabled,
-        modifier = Modifier
-    ) {
-        text?.let {
-            Text(
-                text = it,
-                color = colorResource(backgroundColor ?: R.color.textColorPrimary),
-                fontFamily = fontFamily,
-                fontSize = fontSize,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-            )
         }
     }
 }
