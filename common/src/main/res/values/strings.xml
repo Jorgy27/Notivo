@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gen_cancel">Cancel</string>
+    <string name="gen_create">Create</string>
+    <string name="dialog_create_note">Create a new note!</string>
+</resources>

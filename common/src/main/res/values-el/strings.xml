@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gen_cancel">Άκυρο</string>
+    <string name="gen_create">Δημιουργία</string>
+    <string name="dialog_create_note">Δημιούργησε μια νέα σημείωση!</string>
+</resources>
