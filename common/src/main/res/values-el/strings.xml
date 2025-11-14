@@ -2,5 +2,6 @@
 <resources>
     <string name="gen_cancel">Άκυρο</string>
     <string name="gen_create">Δημιουργία</string>
+    <string name="gen_save">Αποθήκευση</string>
     <string name="dialog_create_note">Δημιούργησε μια νέα σημείωση!</string>
 </resources>

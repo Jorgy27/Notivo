@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Dialog -->
+    <dimen name="gd_default_icon_size">32dp</dimen>
+    <dimen name="gd_exit_icon_size">16dp</dimen>
+</resources>

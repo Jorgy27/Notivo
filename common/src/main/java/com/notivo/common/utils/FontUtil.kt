@@ -8,7 +8,6 @@ import com.notivo.common.R
 
 object FontUtil {
 
-    val iconFont = FontFamily(Font(R.font.icons_font))
     val fontRegular = FontFamily(Font(R.font.font_regular))
     val fontMedium = FontFamily(Font(R.font.font_medium))
     val fontBold = FontFamily(Font(R.font.font_bold))

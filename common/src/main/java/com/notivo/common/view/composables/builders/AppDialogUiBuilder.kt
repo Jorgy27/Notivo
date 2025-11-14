@@ -2,11 +2,12 @@ package com.notivo.common.view.composables.builders
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.notivo.common.data.AppDialogItemInfo
 
 interface AppDialogUiBuilder {
 
     @Composable
-    fun BuildHeader(title: String) {
+    fun BuildHeader(dialogItemInfo: AppDialogItemInfo) {
     }
 
     @Composable
@@ -21,9 +22,8 @@ interface AppDialogUiBuilder {
      * */
     @Composable
     fun BuildButtons(
-        modifier: Modifier,
-        onPositiveButtonClicked: () -> Unit,
-        onNegativeButtonClicked: () -> Unit
+        dialogItemInfo: AppDialogItemInfo,
+        modifier: Modifier
     ) {
     }
 }
