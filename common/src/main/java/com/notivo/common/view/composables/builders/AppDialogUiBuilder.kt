@@ -1,4 +1,4 @@
-package com.notivo.common.composables.builders
+package com.notivo.common.view.composables.builders
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
