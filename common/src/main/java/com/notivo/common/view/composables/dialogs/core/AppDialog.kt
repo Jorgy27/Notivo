@@ -20,10 +20,11 @@ fun AppDialog(
     header: @Composable (() -> Unit)? = null,
     content: @Composable (() -> Unit),
     buttons: @Composable (() -> Unit)? = null,
+    onDismiss: () -> Unit = {},
     modifier: Modifier
 ) {
     Dialog(
-        onDismissRequest = {}
+        onDismissRequest = onDismiss
     ) {
         Column(
             modifier = modifier

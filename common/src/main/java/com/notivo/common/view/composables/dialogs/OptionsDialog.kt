@@ -40,6 +40,11 @@ fun OptionsDialog(
             )
         },
         buttons = null,
+        onDismiss = {
+            if (dialogItemInfo.isCancelable) {
+                dialogItemInfo.onNegativeButtonClicked.invoke()
+            }
+        },
         modifier = modifier
     )
 }

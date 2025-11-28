@@ -16,7 +16,7 @@ import com.notivo.common.utils.FontUtil.fontMedium
 object DialogConfig {
 
     data class AppDialogItemInfo(
-        val title: DialogTitle,
+        val title: DialogTitle = DialogTitle(""),
         val positiveButton: DialogButton? = null,
         val negativeButton: DialogButton? = null,
         val isCancelable: Boolean = false,

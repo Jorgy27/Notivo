@@ -16,14 +16,14 @@ fun HomeScreen(modifier: Modifier = Modifier, onClick: () -> Unit) {
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Cyan),
+            .background(Color.Cyan)
+            .clickable { onClick() },// invoke the click lambda
         contentAlignment = Alignment.Center,
         propagateMinConstraints = false
     ) {
         Text(
             text = "Hello Home!",
             modifier = Modifier
-                .clickable { onClick() } // invoke the click lambda
         )
     }
 }

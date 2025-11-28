@@ -54,6 +54,11 @@ fun RadioDialog(
                 dialogItemInfo
             )
         },
+        onDismiss = {
+            if (dialogItemInfo.isCancelable) {
+                dialogItemInfo.onNegativeButtonClicked.invoke()
+            }
+        },
         modifier = modifier
     )
 }
