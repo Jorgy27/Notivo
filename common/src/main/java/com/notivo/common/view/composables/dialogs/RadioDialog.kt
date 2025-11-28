@@ -33,7 +33,6 @@ import com.notivo.common.view.configs.DialogConfig
 @Composable
 fun RadioDialog(
     options: List<String?>,
-    trailingIconList: List<Int>? = null,
     selectedIndex: MutableState<Int>,
     dialogItemInfo: DialogConfig.AppDialogItemInfo,
     modifier: Modifier = Modifier
@@ -43,7 +42,6 @@ fun RadioDialog(
         content = {
             RadioDialogContent(
                 options,
-                trailingIconList,
                 selectedIndex
             )
         },
@@ -62,7 +60,6 @@ fun RadioDialog(
 @Composable
 fun RadioDialogContent(
     options: List<String?>,
-    trailingIconList: List<Int>? = null,
     selectedIndex: MutableState<Int>
 ) {
     val scrollState = rememberScrollState()
@@ -90,14 +87,10 @@ fun RadioDialogContent(
                 ) {
 
                     Icon(
-                        painter = if (trailingIconList.isNullOrEmpty()) {
-                            if (index == selectedIndex.value) {
-                                painterResource(R.drawable.radio_button_checked)
-                            } else {
-                                painterResource(R.drawable.radio_button_unchecked)
-                            }
+                        painter = if (index == selectedIndex.value) {
+                            painterResource(R.drawable.radio_button_checked)
                         } else {
-                            painterResource(trailingIconList[index])
+                            painterResource(R.drawable.radio_button_unchecked)
                         },
                         contentDescription = null,
                         modifier = Modifier
@@ -140,7 +133,6 @@ fun RadioDialogPreview() {
 
     RadioDialog(
         options,
-        null,
         remember { mutableIntStateOf(0) },
         previewDialogInfo
     )
