@@ -1,4 +1,4 @@
-package com.notivo.common.view.composables
+package com.notivo.common.view.composables.notes
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
