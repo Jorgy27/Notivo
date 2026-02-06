@@ -27,9 +27,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.notivo.common.R
+import com.notivo.common.data.ChecklistNote
+import com.notivo.common.data.TextNote
 import com.notivo.common.utils.FontUtil
 import com.notivo.common.view.model.NoteUiState
-import com.notivo.common.view.model.UiNote
 
 @Composable
 fun NotePreview(
@@ -57,25 +58,23 @@ fun NotePreview(
             )
 
             when (noteUiState.content) {
-                is UiNote.CheckItem -> TODO()
-                is UiNote.SubNote -> TODO()
-                is UiNote.Text -> {
-                    val body = (noteUiState.content as UiNote.Text).text
+                is TextNote -> {
+                    val body = (noteUiState.content as TextNote).text ?: ""
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(top = 3.dp)
                             .background(Color.LightGray)
-                            /*.drawWithCache {
-                                val brush = Brush.horizontalGradient(
-                                    1.0f to Color.Transparent
-                                )
+                        /*.drawWithCache {
+                            val brush = Brush.horizontalGradient(
+                                1.0f to Color.Transparent
+                            )
 
-                                onDrawWithContent {
-                                    drawContent()
-                                    drawRect(brush, blendMode = BlendMode.SrcIn)
-                                }
-                            }*/
+                            onDrawWithContent {
+                                drawContent()
+                                drawRect(brush, blendMode = BlendMode.SrcIn)
+                            }
+                        }*/
                     ) {
                         Text(
                             text = body,
@@ -85,6 +84,9 @@ fun NotePreview(
                         )
                     }
                 }
+
+                is ChecklistNote -> TODO()
+                null -> TODO()
             }
         }
 
@@ -110,7 +112,7 @@ private fun NotePreviewPreview() {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.
 """.trimIndent()
 
-    val note = NoteUiState(title = title, content = UiNote.Text(previewText))
+    val note = NoteUiState(title = title, content = TextNote("1", "Test", null, previewText))
 
     NotePreview(note)
 }

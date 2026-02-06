@@ -1,23 +1,13 @@
 package com.notivo.common.view.model
 
+import com.notivo.common.data.Note
+import com.notivo.common.data.TextNote
+
 // Model
 data class NoteUiState(
-    var title: String = "",
-    var content: UiNote = UiNote.Text(""),
+    var title: String? = "",
+    var content: Note? = TextNote("1", "Sample", null, "Test"),
     var isEditing: Boolean = false,
     var isSaving: Boolean = false,
     var error: String? = null
 )
-
-sealed interface UiNote {
-    data class Text(var text: String) : UiNote
-    data class CheckItem(
-        var key: String,
-        var value: String,
-        var isChecked: Boolean
-    ) : UiNote
-    data class SubNote(
-        var title: String,
-        var note: UiNote
-    ) : UiNote
-}

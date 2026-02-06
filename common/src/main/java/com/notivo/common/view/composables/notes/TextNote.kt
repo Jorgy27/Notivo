@@ -23,8 +23,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.notivo.common.data.TextNote
 import com.notivo.common.view.model.NoteUiState
-import com.notivo.common.view.model.UiNote
 
 //TODO: Move this.
 @Composable
@@ -71,14 +71,16 @@ fun TextViewItem(
                     .clip(RoundedCornerShape(16.dp))
                     .background(Color.White)
             ) {
-                TextField(
-                    value = noteState.title,
-                    placeholder = { Text(text = "Title", modifier = Modifier.fillMaxSize()) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight(),
-                    onValueChange = onTitleChange,
-                )
+                noteState.title?.let {
+                    TextField(
+                        value = it,
+                        placeholder = { Text(text = "Title", modifier = Modifier.fillMaxSize()) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight(),
+                        onValueChange = onTitleChange,
+                    )
+                }
             }
             Spacer(modifier = Modifier.height(4.dp))
             Box(
@@ -89,14 +91,16 @@ fun TextViewItem(
                     .background(Color.White)
             ) {
                 when (val content = noteState.content) {
-                    is UiNote.Text -> {
-                        TextField(
-                            value = content.text,
-                            placeholder = { Text(text = "Add Text Here", modifier = Modifier.fillMaxSize()) },
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            onValueChange = onBodyChange
-                        )
+                    is TextNote -> {
+                        content.text?.let {
+                            TextField(
+                                value = it,
+                                placeholder = { Text(text = "Add Text Here", modifier = Modifier.fillMaxSize()) },
+                                modifier = Modifier
+                                    .fillMaxSize(),
+                                onValueChange = onBodyChange
+                            )
+                        }
                     }
 
                     else -> Text("Unsupported note type")
@@ -114,7 +118,7 @@ fun NoteScreenPreview() {
     var body by remember { mutableStateOf("Preview Body") }
 
     val previewNote = remember(title, body) {
-        NoteUiState(title = title, content = UiNote.Text(body))
+        NoteUiState(title = title, content = TextNote("1", "Test", null, body))
     }
     NoteScreen(
         state = previewNote,

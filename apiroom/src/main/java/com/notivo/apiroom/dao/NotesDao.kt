@@ -3,7 +3,7 @@ package com.notivo.apiroom.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
-import com.notivo.apiRoom.data.NoteDbItem
+import com.notivo.apiroom.data.NoteDbItem
 
 @Dao
 interface NotesDao {
