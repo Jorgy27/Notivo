@@ -6,8 +6,7 @@ import javax.inject.Inject
 
 class NotesViewModel @Inject constructor(
     private val addNoteUseCase: AddNoteUseCase
-) :
-    BaseViewModel<NotesViewModel.NotesViewState, NotesViewModel.NotesAction>(NotesViewState()) {
+) : BaseViewModel<NotesViewModel.NotesViewState, NotesViewModel.NotesAction>(NotesViewState()) {
 
     suspend fun addNote(note: Note) {
         addNoteUseCase.invoke(note)
