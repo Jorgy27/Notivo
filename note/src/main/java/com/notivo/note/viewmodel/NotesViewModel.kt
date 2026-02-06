@@ -1,7 +1,12 @@
-package com.notivo.common.viewmodel
+package com.notivo.note.viewmodel
 
 import com.notivo.common.data.Note
 import com.notivo.common.usecases.AddNoteUseCase
+import com.notivo.common.viewmodel.BaseAction
+import com.notivo.common.viewmodel.BaseViewModel
+import com.notivo.common.viewmodel.BaseViewState
+import com.notivo.note.utils.toUiState
+import com.notivo.note.view.model.NoteUiState
 import javax.inject.Inject
 
 class NotesViewModel @Inject constructor(
@@ -10,13 +15,13 @@ class NotesViewModel @Inject constructor(
 
     suspend fun addNote(note: Note) {
         addNoteUseCase.invoke(note)
-        dispatch(NotesAction.AddNoteAction(note))
+        dispatch(NotesAction.AddNoteAction(note.toUiState()))
     }
 
     override fun onReduceState(viewAction: NotesAction): NotesViewState = when (viewAction) {
         is NotesAction.AddNoteAction -> state.copy(
-            note = viewAction.note,
-            isLoading = false,
+            noteUiState = viewAction.note,
+            isLoading = true,
             error = null
         )
 
@@ -27,13 +32,13 @@ class NotesViewModel @Inject constructor(
     }
 
     data class NotesViewState(
-        var note: Note? = null,
+        var noteUiState: NoteUiState? = null,
         var isLoading: Boolean = true,
         var error: Throwable? = null,
     ) : BaseViewState
 
     sealed class NotesAction : BaseAction {
         class Failure(var error: Throwable) : NotesAction()
-        class AddNoteAction(var note: Note) : NotesAction()
+        class AddNoteAction(var note: NoteUiState) : NotesAction()
     }
 }
