@@ -10,6 +10,9 @@ sealed class SubGraphDestination{
 
     @Serializable
     data object MyLists: SubGraphDestination()
+
+    @Serializable
+    data object Note: SubGraphDestination()
 }
 
 /**Represents leaf destinations (screens) inside a subgraph.
@@ -21,4 +24,7 @@ sealed class Destination{
 
     @Serializable
     data object MyLists: Destination()
+
+    @Serializable
+    data object Note: Destination()
 }
