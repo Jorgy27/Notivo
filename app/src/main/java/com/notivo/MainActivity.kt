@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
@@ -28,13 +29,18 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.notivo.common.R
 import com.notivo.common.data.NavigationItem
 import com.notivo.common.navigation.SubGraphDestination
+import com.notivo.common.view.composables.buttons.CircularFloatingButton
+import com.notivo.common.view.composables.buttons.FloatingShadowConfig
+import com.notivo.common.view.composables.buttons.RadialFloatingButton
 import com.notivo.ui.theme.NotivoTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -96,6 +102,55 @@ class MainActivity : ComponentActivity() {
                     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                         Box(modifier = Modifier.padding(innerPadding)) {
                             MainNavigation(navController = navController, defaultNavigator = defaultNavigator)
+
+                            RadialFloatingButton(
+                                modifier = Modifier
+                                    .align(Alignment.BottomEnd)
+                                    .padding(15.dp)
+                                    .size(64.dp),
+                                distanceRadius = 60.dp,
+                                buttonSize = 55.dp,
+                                items = listOf(
+                                    { CircularFloatingButton(
+                                        modifier = Modifier,
+                                        buttonSize = 49.dp,
+                                        iconSize = 24.dp,
+                                        iconTint = R.color.black,
+                                        backgroundColor = R.color.accessColor,
+                                        floatingShadowConfig = null,
+                                        iconRes = R.drawable.ic_add,
+                                        onClick = {}
+                                    ) },
+                                    { CircularFloatingButton(
+                                        modifier = Modifier,
+                                        buttonSize = 49.dp,
+                                        iconSize = 24.dp,
+                                        iconTint = R.color.black,
+                                        backgroundColor = R.color.accessColor,
+                                        floatingShadowConfig = null,
+                                        iconRes = R.drawable.ic_add,
+                                        onClick = {}
+                                    ) },
+                                    { CircularFloatingButton(
+                                        modifier = Modifier,
+                                        buttonSize = 49.dp,
+                                        iconSize = 24.dp,
+                                        iconTint = R.color.black,
+                                        backgroundColor = R.color.accessColor,
+                                        floatingShadowConfig = null,
+                                        iconRes = R.drawable.ic_add,
+                                        onClick = {}
+                                    ) },
+                                ),
+                                iconSize = 30.dp,
+                                iconTint = R.color.black,
+                                backgroundColor = R.color.accessColor,
+                                floatingShadowConfig = FloatingShadowConfig(
+                                    R.color.accessShadowColor,
+                                    R.color.accessShadowColor
+                                ),
+                                iconRes = R.drawable.ic_add
+                            )
                         }
                     }
                 }
