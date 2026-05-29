@@ -2,7 +2,6 @@ package com.notivo.home.navigation
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.width
-import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -13,13 +12,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.notivo.common.R
-import com.notivo.home.composables.HomeScreen
 import com.notivo.common.navigation.Destination
 import com.notivo.common.navigation.Feature
 import com.notivo.common.navigation.SubGraphDestination
 import com.notivo.common.view.composables.dialogs.OptionsDialog
 import com.notivo.common.view.configs.DialogConfig
-import kotlin.coroutines.coroutineContext
+import com.notivo.home.composables.HomeScreen
 
 interface HomeFeature : Feature {}
 

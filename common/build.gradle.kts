@@ -46,6 +46,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.easyprefs)
     testImplementation(libs.junit)
+    implementation(libs.androidx.compose.foundation.layout)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(platform(libs.androidx.compose.bom))

@@ -18,7 +18,7 @@ fun HomeScreen(modifier: Modifier = Modifier, onClick: () -> Unit) {
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Cyan)
+            .background(colorResource(R.color.beige))
             .clickable { onClick() },// invoke the click lambda
         contentAlignment = Alignment.Center,
         propagateMinConstraints = false

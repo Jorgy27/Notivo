@@ -3,5 +3,8 @@
     <string name="gen_cancel">Άκυρο</string>
     <string name="gen_create">Δημιουργία</string>
     <string name="gen_save">Αποθήκευση</string>
+    <string name="gen_info">#gen_info</string>
+    <string name="gen_ok">Εντάξει</string>
     <string name="dialog_create_note">Δημιούργησε μια νέα σημείωση!</string>
+    <string name="dialog_save_note_warning">#dialog_save_note_warning</string>
 </resources>

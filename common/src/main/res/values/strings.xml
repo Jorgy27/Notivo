@@ -3,5 +3,8 @@
     <string name="gen_cancel">Cancel</string>
     <string name="gen_create">Create</string>
     <string name="gen_save">Save</string>
+    <string name="gen_info">Info</string>
+    <string name="gen_ok">OK</string>
     <string name="dialog_create_note">Create a new note!</string>
+    <string name="dialog_save_note_warning">Are you sure you want to exit before saving!?</string>
 </resources>

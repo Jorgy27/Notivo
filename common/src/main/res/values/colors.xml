@@ -6,4 +6,5 @@
     <color name="textColorPrimary">#000000</color>
     <color name="accessColor">#FF8B16</color>
     <color name="accessShadowColor">#3C1F03</color>
+    <color name="beige">#FFF1B7</color>
 </resources>

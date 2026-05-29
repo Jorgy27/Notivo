@@ -6,7 +6,7 @@ import com.notivo.common.viewmodel.BaseAction
 import com.notivo.common.viewmodel.BaseViewModel
 import com.notivo.common.viewmodel.BaseViewState
 import com.notivo.note.utils.toUiState
-import com.notivo.note.view.model.NoteUiState
+import com.notivo.common.view.models.NoteUiState
 import javax.inject.Inject
 
 class NotesViewModel @Inject constructor(

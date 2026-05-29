@@ -1,8 +1,11 @@
-package com.notivo.note.view.model
+package com.notivo.common.view.models
+
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 
 data class NoteUiState(
-    val title: String = "",
-    val content: NoteContentUi = NoteContentUi.Text(""),
+    var title: MutableState<String> = mutableStateOf(""),
+    val content: NoteContentUi = NoteContentUi.Text(mutableStateOf("")),
     val isEditing: Boolean = false,
     val isSaving: Boolean = false,
     val error: String? = null
@@ -10,7 +13,7 @@ data class NoteUiState(
 
 sealed class NoteContentUi {
     data class Text(
-        val text: String? = null
+        var text: MutableState<String> = mutableStateOf("")
     ) : NoteContentUi()
 
     data class Checklist(

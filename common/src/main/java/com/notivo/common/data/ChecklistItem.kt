@@ -2,7 +2,7 @@ package com.notivo.common.data
 
 data class ChecklistItem(
     val id: String? = null,
-    val title: String? = null,
-    val description: String? = null,
-    val isChecked: Boolean? = null
+    var title: String? = null,
+    var description: String? = null,
+    var isChecked: Boolean? = null
 )

@@ -3,9 +3,9 @@ package com.notivo.note.utils
 import com.notivo.common.data.ChecklistNote
 import com.notivo.common.data.Note
 import com.notivo.common.data.TextNote
-import com.notivo.note.view.model.ChecklistItemUi
-import com.notivo.note.view.model.NoteContentUi
-import com.notivo.note.view.model.NoteUiState
+import com.notivo.common.view.models.ChecklistItemUi
+import com.notivo.common.view.models.NoteContentUi
+import com.notivo.common.view.models.NoteUiState
 
 fun Note.toUiState(): NoteUiState = NoteUiState(
     title = title,

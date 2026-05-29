@@ -4,6 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -32,28 +37,47 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.notivo.common.R
 import com.notivo.common.data.NavigationItem
+import com.notivo.common.data.TextNote
 import com.notivo.common.navigation.SubGraphDestination
+import com.notivo.common.utils.previewDialogInfo
+import com.notivo.common.view.composables.buttons.AppFloatingButton
 import com.notivo.common.view.composables.buttons.CircularFloatingButton
 import com.notivo.common.view.composables.buttons.FloatingShadowConfig
 import com.notivo.common.view.composables.buttons.RadialFloatingButton
+import com.notivo.common.view.composables.dialogs.QuickNoteDialog
+import com.notivo.common.view.configs.AppFloatingButtonConfig
+import com.notivo.common.view.configs.DialogConfig
+import com.notivo.common.view.models.NoteContentUi
 import com.notivo.ui.theme.NotivoTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalView
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     @Inject
     lateinit var defaultNavigator: DefaultNavigator
 
+    private var viewModel: MainViewModel = MainViewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
         setContent {
             NotivoTheme {
@@ -62,6 +86,9 @@ class MainActivity : ComponentActivity() {
                 var selectedItemIndex by rememberSaveable { mutableIntStateOf(0) }
                 val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
                 val scope = rememberCoroutineScope()
+                var showQuickNoteDialog by remember { mutableStateOf(false) }
+                val context = LocalContext.current
+                var selectedDialogOption: AppFloatingButtonConfig.FloatingButtonAction? = null
 
                 ModalNavigationDrawer(
                     drawerState = drawerState,
@@ -103,53 +130,42 @@ class MainActivity : ComponentActivity() {
                         Box(modifier = Modifier.padding(innerPadding)) {
                             MainNavigation(navController = navController, defaultNavigator = defaultNavigator)
 
-                            RadialFloatingButton(
+                            val appFloatingButtonInfo = AppFloatingButtonConfig.AppFloatingButtonInfo(
+                                childrenInfo = listOf(
+                                    AppFloatingButtonConfig.AppFloatingButtonChildInfo(
+                                        icon = R.drawable.ic_add,
+                                        action = AppFloatingButtonConfig.FloatingButtonAction.ADD_NOTE
+                                    ),
+                                    AppFloatingButtonConfig.AppFloatingButtonChildInfo(
+                                        icon = R.drawable.ic_create_folder,
+                                        action = AppFloatingButtonConfig.FloatingButtonAction.ADD_FOLDER
+                                    ),
+                                    AppFloatingButtonConfig.AppFloatingButtonChildInfo(
+                                        icon = R.drawable.ic_create_reminder,
+                                        action = AppFloatingButtonConfig.FloatingButtonAction.ADD_QUICK_REMINDER
+                                    ),
+                                )
+                            )
+                            AppFloatingButton(
                                 modifier = Modifier
-                                    .align(Alignment.BottomEnd)
-                                    .padding(15.dp)
-                                    .size(64.dp),
-                                distanceRadius = 60.dp,
-                                buttonSize = 55.dp,
-                                items = listOf(
-                                    { CircularFloatingButton(
-                                        modifier = Modifier,
-                                        buttonSize = 49.dp,
-                                        iconSize = 24.dp,
-                                        iconTint = R.color.black,
-                                        backgroundColor = R.color.accessColor,
-                                        floatingShadowConfig = null,
-                                        iconRes = R.drawable.ic_add,
-                                        onClick = {}
-                                    ) },
-                                    { CircularFloatingButton(
-                                        modifier = Modifier,
-                                        buttonSize = 49.dp,
-                                        iconSize = 24.dp,
-                                        iconTint = R.color.black,
-                                        backgroundColor = R.color.accessColor,
-                                        floatingShadowConfig = null,
-                                        iconRes = R.drawable.ic_add,
-                                        onClick = {}
-                                    ) },
-                                    { CircularFloatingButton(
-                                        modifier = Modifier,
-                                        buttonSize = 49.dp,
-                                        iconSize = 24.dp,
-                                        iconTint = R.color.black,
-                                        backgroundColor = R.color.accessColor,
-                                        floatingShadowConfig = null,
-                                        iconRes = R.drawable.ic_add,
-                                        onClick = {}
-                                    ) },
+                                    .align(Alignment.BottomEnd),
+                                floatingButtonInfo = appFloatingButtonInfo,
+                                onOptionClicked = {
+                                    showQuickNoteDialog = true
+                                    selectedDialogOption = it
+                                }
+                            )
+
+                            QuickNoteDialog(
+                                dialogItemInfo = DialogConfig.AppDialogItemInfo(
+                                    title = DialogConfig.DialogTitle("Quick Text Note"),
+                                    onPositiveButtonClicked = {
+                                        selectedDialogOption?.let { option -> viewModel.addQuickNote(option, context) }
+                                    },
+                                    onNegativeButtonClicked = { showQuickNoteDialog = false }
                                 ),
-                                iconSize = 30.dp,
-                                iconTint = R.color.black,
-                                backgroundColor = R.color.accessColor,
-                                floatingShadowConfig = FloatingShadowConfig(
-                                    R.color.accessShadowColor,
-                                    R.color.accessShadowColor
-                                ),
-                                iconRes = R.drawable.ic_add
+                                isVisible = showQuickNoteDialog,
+                                modifier = Modifier
                             )
                         }
                     }
